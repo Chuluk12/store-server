@@ -98,8 +98,7 @@ module.exports = {
              await Category.findByIdAndRemove({
                 _id:id
             });
-
-            
+ 
             req.flash("alertMessage", "Berhasil hapus kateogri");
             req.flash("alertStatus", "seccess")
             res.redirect("/category")
