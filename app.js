@@ -1,13 +1,12 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 const methodOverride = require("method-override");
 const session = require("express-session");
 const flash = require("connect-flash");
 const cors = require("cors");
-
 
 const categoryRouter = require('./app/category/routes');
 const dashboardRouter = require('./app/dashboard/router');
@@ -19,9 +18,11 @@ const usersRouter = require('./app/users/router');
 const transactionRouter = require('./app/transaction/router');
 const playerRouter = require('./app/player/router');
 const authRouter = require('./app/auth/router');
-const URL = `/api/v1`
 
-var app = express();
+const app = express();
+const URL = `/api/v1`
+app.use(cors());
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -41,6 +42,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use("/adminlte", express.static(path.join(__dirname, '/node_modules/admin-lte/')));
 
+// app.use((req, res, next)=> {
+//   req.setHeader('Access-Control-Allow-Origin', '*');
+//   req.setHeader('Access-Control-Allow-Methods', 'Get, POST, PUT, PATCH, DELETE, OPTIONS');
+//   req.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+//   next();
+// })
+
 app.use('/dashboard', dashboardRouter);
 app.use('/category', categoryRouter);
 app.use("/nominal", nominalRouter);
@@ -54,7 +62,7 @@ app.use('/players', playerRouter);
 // api
 app.use(`${URL}/players`, playerRouter);
 app.use(`${URL}/auth`, authRouter);
-app.use(cors())
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
