@@ -42,13 +42,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use("/adminlte", express.static(path.join(__dirname, '/node_modules/admin-lte/')));
 
-// app.use((req, res, next)=> {
-//   req.setHeader('Access-Control-Allow-Origin', '*');
-//   req.setHeader('Access-Control-Allow-Methods', 'Get, POST, PUT, PATCH, DELETE, OPTIONS');
-//   req.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-//   next();
-// })
-
 app.use('/dashboard', dashboardRouter);
 app.use('/category', categoryRouter);
 app.use("/nominal", nominalRouter);
