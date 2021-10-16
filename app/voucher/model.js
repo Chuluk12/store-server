@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 let voucherSchema = mongoose.Schema({
-
+  
   name: {
     type: String,
     require: [true, 'Nama game harus diisi']
@@ -31,6 +31,8 @@ let voucherSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
+
+
 }, { timestamps: true })
 
 module.exports = mongoose.model('Voucher', voucherSchema)

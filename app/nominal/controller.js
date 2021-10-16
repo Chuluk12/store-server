@@ -22,6 +22,7 @@ module.exports={
       
     }
   },
+  
   viewCreate : async(req, res)=>{
     try {
       res.render('admin/nominal/create',{
