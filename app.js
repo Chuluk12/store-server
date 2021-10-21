@@ -8,7 +8,7 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const cors = require("cors");
 
-const categoryRouter = require('./app/category/routes');
+const categoryRouter = require('./app/category/router');
 const dashboardRouter = require('./app/dashboard/router');
 const nominalRouter = require("./app/nominal/router");
 const voucherRouter = require("./app/voucher/router");

@@ -1,5 +1,5 @@
 const Voucher = require('./model')
-const Category = require('../category/models')
+const Category = require('../category/model')
 const Nominal = require('../nominal/model')
 const path = require('path')
 const fs = require('fs')
@@ -29,12 +29,10 @@ module.exports = {
 
     }
   },
-
   viewCreate: async (req, res) => {
     try {
       const category = await Category.find()
       const nominal = await Nominal.find()
-      
       res.render('admin/voucher/create', {
         category,
         nominal,
@@ -213,6 +211,7 @@ module.exports = {
         fs.unlinkSync(currentImage)
       }
 
+
       req.flash('alertMessage', "Berhasil hapus voucher")
       req.flash('alertStatus', "success")
 
@@ -240,11 +239,13 @@ module.exports = {
       req.flash('alertStatus', "success")
 
       res.redirect('/voucher')
-    
+
+      
     } catch (err) {
       req.flash('alertMessage', `${err.message}`)
       req.flash('alertStatus', 'danger')
       res.redirect('/voucher')
     }
   }
+
 }

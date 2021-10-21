@@ -27,7 +27,7 @@ module.exports ={
             const player = new Player({ ...payload, avatar: filename })
 
             await player.save();
-            
+
             delete player._doc.password
 
             res.status(201).json({ data : player }) 

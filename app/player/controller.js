@@ -1,6 +1,6 @@
 const Player = require('./model')
 const Voucher = require('../voucher/model')
-const Category = require('../category/models')
+const Category = require('../category/model')
 const Bank = require('../bank/model')
 const Payment = require('../payment/model')
 const Nominal = require('../nominal/model')
@@ -24,13 +24,12 @@ module.exports = {
 
     }
   },
-
   detailPage: async (req, res) => {
     try {
       const { id } = req.params
       const voucher = await Voucher.findOne({ _id: id })
-        .populate('nominals')
         .populate('category')
+        .populate('nominals')
         .populate('user', '_id name phoneNumber')
 
       if (!voucher) {
@@ -41,9 +40,9 @@ module.exports = {
       res.status(200).json({ 
         data: {
           detail: voucher,
-          payment
-        }
-      })
+          payment 
+      }
+    })
 
     } catch (err) {
 
@@ -67,7 +66,7 @@ module.exports = {
       const { accountUser, name, nominal, voucher, payment, bank } = req.body
 
       const res_voucher = await Voucher.findOne({ _id: voucher })
-        .select('name category _id thumbnail user')
+        .select('name caegory _id thumbnail user')
         .populate('category')
         .populate('user')
 
@@ -88,8 +87,9 @@ module.exports = {
       let tax = (10 / 100) * res_nominal._doc.price;
       let value = res_nominal._doc.price - tax;
 
-      // console.log("res_payment >>")
-      // console.log(res_payment._doc)
+
+      console.log("res_payment >>")
+      console.log(res_payment._doc)
       const payload = {
         historyVoucherTopup: {
           gameName: res_voucher._doc.name,
@@ -118,6 +118,7 @@ module.exports = {
 
         category: res_voucher._doc.category?._id,
         user: res_voucher._doc.user?._id
+
       }
 
       const transaction = new Transaction(payload)
@@ -277,7 +278,7 @@ module.exports = {
             avatar: filename
           }, { new: true, runValidators: true })
 
-          // console.log(player)
+          console.log(player)
 
           res.status(201).json({
             data: {
